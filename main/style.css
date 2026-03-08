@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&subset=cyrillic&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-base:        #0d0d0d;
+  --bg-surface:     #161616;
+  --bg-elevated:    #1f1f1f;
+  --border:         #2a2a2a;
+  --border-subtle:  #222222;
+  --accent:         #6d28d9;
+  --accent-hover:   #5b21b6;
+  --accent-glow:    rgba(109, 40, 217, 0.15);
+  --accent-glow-lg: rgba(109, 40, 217, 0.08);
+  --text-primary:   #ececec;
+  --text-secondary: #8e8e8e;
+  --text-muted:     #555555;
+  --radius-sm:      6px;
+  --radius-md:      12px;
+  --radius-lg:      18px;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-elevated) var(--bg-base);
+}
+
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--bg-elevated);
+  border-radius: 999px;
+}
+
+/* apupenniy radial glow in center */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, var(--accent-glow-lg), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/*----------- MAIN CONTAINER -----------*/
+
+.main-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/*----------- START SECTION -----------*/
+
+.start-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 100vh;
+  padding-bottom: 60px;
+  animation: fadeSlideIn 0.4s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/*----------- TITLE -----------*/
+
+#game-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(28px, 6vw, 48px);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 36px;
+  background: var(--bg-surface);
+  position: relative;
+}
+
+/* accent top-left corner line 💀*/
+#game-title::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 32px;
+  height: 32px;
+  border-top: 2px solid var(--accent);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--radius-sm) 0 0 0;
+}
+
+/* accent bottom-right corner line 💀*/
+#game-title::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 32px;
+  height: 32px;
+  border-bottom: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  border-radius: 0 0 var(--radius-sm) 0;
+}
+
+/*----------- HINT -----------*/
+
+.hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+}
+
+/*----------- START BUTTON -----------*/
+
+.start-button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 14px 48px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.18s ease, transform 0.12s ease, box-shadow 0.18s ease;
+}
+
+.start-button:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 0 28px var(--accent-glow);
+}
+
+.start-button:active {
+  transform: scale(0.96);
+}
+
+/*----------- INFORMATION -----------*/
+
+.information {
+  width: 100%;
+  max-width: 680px;
+  padding: 0 24px 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeSlideIn 0.5s 0.1s ease both;
+}
+
+details {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  overflow: hidden;
+  transition: border-color 0.18s ease;
+}
+
+details[open] {
+  border-color: var(--accent);
+}
+
+details summary {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 16px 20px;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  transition: color 0.18s ease;
+}
+
+details summary::-webkit-details-marker { display: none; }
+
+details summary::after {
+  content: '+';
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--text-muted);
+  transition: transform 0.22s ease, color 0.18s ease;
+  line-height: 1;
+}
+
+details[open] summary::after {
+  transform: rotate(45deg);
+  color: var(--accent);
+}
+
+details[open] summary {
+  color: var(--text-primary);
+}
+
+details > :not(summary) {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  padding: 0 20px 18px;
+}
+
+/*----------- FOOTER -----------*/
+
+footer {
+  position: relative;
+  z-index: 1;
+  padding: 12px 16px 16px;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.buttons a {
+  display: inline-flex;
+}
+
+.buttons button {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+}
+
+.buttons button:hover {
+  background: var(--bg-elevated);
+  border-color: var(--accent);
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+
+.buttons button:active {
+  transform: scale(0.94);
+}
+
+.buttons button img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  opacity: 0.75;
+  transition: opacity 0.18s ease;
+}
+
+.buttons button:hover img {
+  opacity: 1;
+}
+
+/*----------- RESPONSIVE -----------*/
+
+@media (max-width: 480px) {
+  #game-title {
+    padding: 12px 24px;
+    letter-spacing: 0.04em;
+  }
+
+  .start-button {
+    padding: 13px 36px;
+  }
+}

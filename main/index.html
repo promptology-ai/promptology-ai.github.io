@@ -3,11 +3,43 @@
     <head>
         <meta charset="UTF-8">
         <title>Promptology</title>
-        <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+        <link rel="stylesheet" href="style.css">
     </head>
 
     <body>
-		<h1>Main</h1>
-		<a href="../chat/index.html">Go</a>
+        <div class="main-container">
+            <div class="start-section">
+                <h1 id="game-title">Promptology</h1>
+                <p class="hint">тема сгенерируется ИИ</p>
+                <button class="start-button" id="start-button" onclick="OnStartButtonClick()">НАЧАТЬ</button>
+            </div>
+
+            <div class="information">
+                <details class="about">
+                    <summary>Об игре</summary>
+                        <p>Твоя задача — придумывать максимально точные, креативные и понятные запросы. Экспериментируй с формулировками, улучшай свои идеи.</p>
+                </details>
+                <details class="how-it-work">
+                    <summary>Как Promptology работает?</summary>
+                        <p>Каждый введённый промт анализируется нейросетью и получает оценку в процентах, показывающую, насколько он детальный, оригинальный и эффективный.</p>
+                </details>
+                <details class="about">
+                    <summary>Чем Promptology полезен?</summary>
+                        <p>Promptology помогает научится создавать максимально детальный, оригинальный и эффективный промт для нейросетей.</p>
+                </details>
+            </div>
+        </div>
+
+        <footer>
+            <div class="buttons"><a href="https://translate.google.com"></a>
+                <a href="https://github.com/RootTool0/AI-Project" target="_blank"> <button> <img src="img/GitHub_Invertocat_White.png" alt="GitHub" width="40"> </button> </a>
+                <a href="https://github.com/RootTool0/AI-Project" target="_blank"> <button> <img src="img/email.png" alt="" width="40"> </button> </a>
+            </div>
+        </footer>
+
+        <script src="../config.js"></script>
+        <script src="frontend.js"></script>
+        <script src="../backend.js"></script>
     </body>
 </html>
+<!-- 12dc5c3897f14fca2d3cf03d0763ed626541de89 -->
