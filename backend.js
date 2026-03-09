@@ -44,7 +44,7 @@ async function SendMessageToAPI(InMessageText)
         */
 
 		
-		// Rewrited to Groq because I fucked OpenRouter
+		// Rewrited to Groq, because I fucked OpenRouter and GigaChad
         const Response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
             headers:
