@@ -18,15 +18,14 @@ async function SendMessageToAPI(InMessageText)
                 {
                     "Authorization": `Bearer ${API_KEY}`,
                     "Content-Type": "application/json",
-                    "HTTP-Referer": "http://localhost:8000",
+                    "HTTP-Referer": "https://promptology-ai.github.io",
                     "X-Title": "Promptology"
                 },
             body: JSON.stringify({
-                model: "google/gemma-3n-e2b-it:free",
+                model: "meta-llama/llama-3.2-3b-instruct:free", // "google/gemma-3n-e2b-it:free",
                 temperature: Temperature,
                 max_tokens: 150,
                 messages: [{ role: "user", content: InMessageText }]
-                // messages: [{ role: "user", content: InMessageText }]
             })
         });
 
