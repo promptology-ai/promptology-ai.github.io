@@ -11,26 +11,7 @@ async function SendMessageToAPI(InMessageText)
     }
 
     try
-    {		
-        /*
-        const Response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-            method: "POST",
-            headers:
-                {
-                    "Authorization": `Bearer ${API_KEY}`,
-                    "Content-Type": "application/json",
-                    "HTTP-Referer": "https://promptology-ai.github.io",
-                    "X-Title": "Promptology"
-                },
-            body: JSON.stringify({
-                model: "qwen/qwen-2-7b-instruct:free", // "google/gemma-3n-e2b-it:free",
-                temperature: Temperature,
-                max_tokens: 150,
-                messages: [{ role: "user", content: InMessageText }]
-            })
-        });
-        */
-		
+    {
         /*
         const Response = await fetch("http://localhost:8080/v1/chat/completions", {
             method: "POST",
