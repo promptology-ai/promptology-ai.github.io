@@ -45,7 +45,10 @@ async function SendMessageToAPI(InMessageText)
 
 		
 		// Rewrited to Groq, because I fucked OpenRouter and GigaChad
-        const Response = await fetch(/*"https://api.groq.com/openai/v1/chat/completions"*/ "https://corsproxy.io", {
+		const proxyUrl = "https://cors-anywhere.com/";
+		const apiUrl = "https://api.groq.com/openai/v1/chat/completions";
+
+        const Response = await fetch(proxyUrl + apiUrl, {
             method: "POST",
             headers:
                 {
