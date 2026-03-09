@@ -11,7 +11,8 @@ async function SendMessageToAPI(InMessageText)
     }
 
     try
-    {
+    {		
+        /*
         const Response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers:
@@ -22,13 +23,14 @@ async function SendMessageToAPI(InMessageText)
                     "X-Title": "Promptology"
                 },
             body: JSON.stringify({
-                model: "meta-llama/llama-3.2-3b-instruct:free", // "google/gemma-3n-e2b-it:free",
+                model: "qwen/qwen-2-7b-instruct:free", // "google/gemma-3n-e2b-it:free",
                 temperature: Temperature,
                 max_tokens: 150,
                 messages: [{ role: "user", content: InMessageText }]
             })
         });
-
+        */
+		
         /*
         const Response = await fetch("http://localhost:8080/v1/chat/completions", {
             method: "POST",
@@ -41,12 +43,29 @@ async function SendMessageToAPI(InMessageText)
         });
         */
 
+		
+		// Rewrited to Groq because I fucked OpenRouter
+        const Response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+            method: "POST",
+            headers:
+                {
+                    "Authorization": `Bearer ${API_KEY}`,
+                    "Content-Type": "application/json"
+                },
+            body: JSON.stringify({
+                model: "llama-3.1-8b-instant",
+                temperature: Temperature,
+                max_tokens: 150,
+                messages: [{ role: "user", content: InMessageText }]
+            })
+        });
+		
         const Data = await Response.json();
         console.log(Data);
-
-        if(!Data.error) return Data.choices[0].message.content;
-
-        console.error("API Error!");
+		return Data.choices[0].message.content;
+		
+        // if(!Data.error) return Data.choices[0].message.content;
+        // console.error("API Error!");
     }
     catch(Error) { console.error("Fetch Error: ", Error); }
 
