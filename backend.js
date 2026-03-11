@@ -12,24 +12,10 @@ async function SendMessageToAPI(InMessageText)
 
     try
     {
-        /*
-        const Response = await fetch("http://localhost:8080/v1/chat/completions", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                temperature: Temperature,
-                max_tokens: 200,
-                messages: [{ role: "user", content: InMessageText }]
-            })
-        });
-        */
+		const Proxy = "https://cors-anywhere.com/";
+		const API = "https://api.groq.com/openai/v1/chat/completions";
 
-		
-		// Rewrited to Groq, because I fucked OpenRouter and GigaChad
-		const proxyUrl = "https://cors-anywhere.com/";
-		const apiUrl = "https://api.groq.com/openai/v1/chat/completions";
-
-        const Response = await fetch(proxyUrl + apiUrl, {
+        const Response = await fetch(Proxy + API, {
             method: "POST",
             headers:
                 {
@@ -43,15 +29,22 @@ async function SendMessageToAPI(InMessageText)
                 messages: [{ role: "user", content: InMessageText }]
             })
         });
-		
+
+        if(!Response.ok) throw new Error(`Response Error: ${Response.status}`);
+
         const Data = await Response.json();
         console.log(Data);
+
+        if(Data.error) throw new Error(Data.error.message);
+
 		return Data.choices[0].message.content;
-		
-        // if(!Data.error) return Data.choices[0].message.content;
-        // console.error("API Error!");
     }
-    catch(Error) { console.error("Fetch Error: ", Error); }
+    catch(Error)
+    {
+        console.error("Fetch Error: ", Error);
+        await new Promise(r => setTimeout(r, 1000));
+        return await SendMessageToAPI(InMessageText);
+    }
 
     return "Ошибка получения ответа от ИИ (открой консоль)";
 }
