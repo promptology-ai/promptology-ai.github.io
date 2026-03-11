@@ -43,6 +43,7 @@ async function SendMessageToAPI(InMessageText)
     {
         console.error("Fetch Error: ", Error);
         await new Promise(r => setTimeout(r, 1000));
+
         return await SendMessageToAPI(InMessageText);
     }
 
